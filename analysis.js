@@ -82,7 +82,24 @@ function analyzeDigits(){
     }
 
 
+// Update moving needles
 
+let evenNeedle =
+document.getElementById("evenNeedle");
+
+if(evenNeedle){
+    evenNeedle.style.transform =
+    `rotate(${(evenPercent * 1.8)-90}deg)`;
+}
+
+
+let overNeedle =
+document.getElementById("overNeedle");
+
+if(overNeedle){
+    overNeedle.style.transform =
+    `rotate(${(overPercent * 1.8)-90}deg)`;
+}
     // Update percentage text
 
     let evenText =
