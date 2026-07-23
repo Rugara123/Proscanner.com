@@ -24,6 +24,7 @@ header{
     padding:20px;
     font-size:22px;
     font-weight:bold;
+    text-align:center;
 }
 
 
@@ -45,7 +46,6 @@ header{
     display:flex;
     overflow-x:auto;
     gap:20px;
-    scroll-snap-type:x mandatory;
 
 }
 
@@ -53,10 +53,19 @@ header{
 .analysis-card{
 
     min-width:90%;
-    background:#172033;
+    background:#1f2937;
     padding:20px;
     border-radius:18px;
-    scroll-snap-align:start;
+
+}
+
+
+
+.circle-row{
+
+    display:flex;
+    justify-content:space-around;
+    gap:15px;
 
 }
 
@@ -64,10 +73,10 @@ header{
 
 .meter{
 
-    width:130px;
-    height:130px;
+    width:120px;
+    height:120px;
+
     border-radius:50%;
-    position:relative;
 
     background:#374151;
 
@@ -75,7 +84,7 @@ header{
     align-items:center;
     justify-content:center;
 
-    margin:auto;
+    position:relative;
 
 }
 
@@ -83,55 +92,28 @@ header{
 
 .inner{
 
-    width:95px;
-    height:95px;
-
-    background:#172033;
+    width:90px;
+    height:90px;
 
     border-radius:50%;
+
+    background:#111827;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    font-size:24px;
+    font-size:22px;
     font-weight:bold;
 
 }
 
 
 
-.needle{
-
-    position:absolute;
-
-    width:4px;
-    height:60px;
-
-    background:white;
-
-    top:5px;
-    left:63px;
-
-    transform-origin:bottom center;
-
-    transform:rotate(-90deg);
-
-    transition:0.8s ease;
-
-    border-radius:10px;
-
-}
-
-
-
-.title{
+.label{
 
     text-align:center;
-
-    margin-top:15px;
-
-    font-size:18px;
+    margin-top:10px;
 
 }
 
@@ -140,22 +122,18 @@ header{
 .confidence{
 
     text-align:center;
-
-    margin-top:10px;
-
+    margin-top:15px;
     font-size:18px;
 
 }
 
 
+
 .digit{
 
-    font-size:70px;
-
     text-align:center;
-
+    font-size:70px;
     color:#00ff88;
-
     font-weight:bold;
 
 }
@@ -164,10 +142,8 @@ header{
 
 .box{
 
-    background:#1f2937;
-
+    background:#111827;
     padding:15px;
-
     border-radius:12px;
 
 }
@@ -177,15 +153,12 @@ header{
 button{
 
     width:100%;
-
     padding:15px;
 
     border:none;
-
     border-radius:12px;
 
     background:#2563eb;
-
     color:white;
 
     font-size:16px;
@@ -195,7 +168,6 @@ button{
 
 </style>
 
-
 </head>
 
 
@@ -203,9 +175,7 @@ button{
 
 
 <header>
-
 ProScanner Digit Markets
-
 </header>
 
 
@@ -220,38 +190,54 @@ ProScanner Digit Markets
 7
 </div>
 
-<p style="text-align:center">
-Live tick digit
-</p>
-
-</div>
 </div>
 
 
 <div class="analysis-slider">
 
 
-<!-- EVEN / ODD -->
-
 <div class="analysis-card">
 
-<h3>Even / Odd</h3>
+<h2>Even / Odd</h2>
 
+
+<div class="circle-row">
+
+
+<div>
 
 <div class="meter" id="evenMeter">
 
-<div class="needle" id="evenNeedle"></div>
-
-
 <div class="inner" id="evenPercent">
-52%
+50%
+</div>
+
+</div>
+
+<div class="label">
+Even
 </div>
 
 </div>
 
 
-<div class="title">
-Even Probability
+<div>
+
+<div class="meter" id="oddMeter">
+
+<div class="inner" id="oddPercent">
+50%
+</div>
+
+</div>
+
+<div class="label">
+Odd
+</div>
+
+</div>
+
+
 </div>
 
 
@@ -262,31 +248,56 @@ Analyzing...
 
 </div>
 
-
-
-
-<!-- OVER / UNDER -->
-
 <div class="analysis-card">
 
-<h3>Over / Under</h3>
+<h2>Over / Under</h2>
+
+
+<div class="circle-row">
+
+
+<div>
 
 
 <div class="meter" id="overMeter">
 
-<div class="needle" id="overNeedle"></div>
-
-
 <div class="inner" id="overPercent">
-61%
+50%
+</div>
+
+</div>
+
+
+<div class="label">
+Over 5
 </div>
 
 
 </div>
 
 
-<div class="title">
-Over 5 Probability
+
+
+<div>
+
+
+<div class="meter" id="underMeter">
+
+<div class="inner" id="underPercent">
+50%
+</div>
+
+</div>
+
+
+<div class="label">
+Under 5
+</div>
+
+
+</div>
+
+
 </div>
 
 
@@ -304,11 +315,13 @@ Analyzing...
 
 <div class="card">
 
+
 <h3>🔥 Hot Digits</h3>
 
 <div class="box" id="hotDigits">
 Analyzing...
 </div>
+
 
 
 <br>
@@ -320,6 +333,7 @@ Analyzing...
 Analyzing...
 </div>
 
+
 </div>
 
 
@@ -327,11 +341,14 @@ Analyzing...
 
 <div class="card">
 
+
 <h3>Tick History</h3>
 
 
 <div class="box" id="tickHistory">
-7 → 2 → 9 → 4 → 1 → 6
+
+7 → 2 → 9 → 4 → 1
+
 </div>
 
 
@@ -353,10 +370,9 @@ Connect Deriv Market
 </div>
 
 
-
 <script src="analysis.js"></script>
 
 
 </body>
 
-    </html>
+</html>
