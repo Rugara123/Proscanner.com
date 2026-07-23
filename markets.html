@@ -12,33 +12,25 @@
 <style>
 
 body{
-
 margin:0;
 font-family:Arial,sans-serif;
 background:#0b1220;
 color:white;
-
 }
 
 
 header{
-
 background:#111827;
 padding:20px;
 text-align:center;
 font-size:22px;
 font-weight:bold;
-
 }
-
 
 
 .container{
-
 padding:20px;
-
 }
-
 
 
 .card{
@@ -52,24 +44,38 @@ margin-bottom:20px;
 
 
 
-.analysis-slider{
+/* Trade menu */
+
+.trade-menu{
 
 display:flex;
 overflow-x:auto;
-gap:20px;
+gap:12px;
+margin-bottom:20px;
 
 }
 
 
 
-.analysis-card{
+.trade-btn{
 
-min-width:90%;
 background:#1f2937;
-padding:20px;
-border-radius:18px;
+padding:12px 18px;
+border-radius:20px;
+white-space:nowrap;
+cursor:pointer;
 
 }
+
+
+
+.trade-btn.active{
+
+background:#2563eb;
+
+}
+
+
 
 
 
@@ -78,7 +84,6 @@ border-radius:18px;
 
 display:flex;
 justify-content:space-around;
-gap:15px;
 
 }
 
@@ -89,14 +94,11 @@ gap:15px;
 width:120px;
 height:120px;
 border-radius:50%;
-
 background:#374151;
 
 display:flex;
 align-items:center;
 justify-content:center;
-
-transition:.5s;
 
 }
 
@@ -106,10 +108,8 @@ transition:.5s;
 
 width:90px;
 height:90px;
-
-background:#111827;
-
 border-radius:50%;
+background:#111827;
 
 display:flex;
 align-items:center;
@@ -132,21 +132,12 @@ margin-top:10px;
 
 
 
-.confidence{
-
-text-align:center;
-margin-top:15px;
-font-size:18px;
-
-}
-
-
 
 .digit{
 
 font-size:70px;
-font-weight:bold;
 text-align:center;
+font-weight:bold;
 color:#00ff88;
 
 }
@@ -160,7 +151,6 @@ height:12px;
 background:#374151;
 border-radius:10px;
 overflow:hidden;
-margin-bottom:15px;
 
 }
 
@@ -170,12 +160,10 @@ margin-bottom:15px;
 
 height:100%;
 width:0%;
-
 background:#00ff88;
 
-transition:.5s;
-
 }
+
 
 
 
@@ -183,8 +171,8 @@ transition:.5s;
 .tick-container{
 
 display:flex;
-flex-wrap:wrap;
 gap:10px;
+flex-wrap:wrap;
 justify-content:center;
 
 }
@@ -195,7 +183,6 @@ justify-content:center;
 
 width:42px;
 height:42px;
-
 border-radius:50%;
 
 display:flex;
@@ -203,31 +190,23 @@ align-items:center;
 justify-content:center;
 
 font-weight:bold;
+
+}
+
+
+
+
+.confidence{
+
+text-align:center;
+margin-top:15px;
 font-size:18px;
 
 }
 
 
 
-
-button{
-
-width:100%;
-padding:15px;
-
-border:none;
-border-radius:12px;
-
-background:#2563eb;
-color:white;
-
-font-size:16px;
-
-}
-
-
 </style>
-
 
 </head>
 
@@ -247,31 +226,52 @@ ProScanner Digit Markets
 
 
 
+<div class="trade-menu">
+
+
+<div class="trade-btn active">
+Even/Odd
+</div>
+
+
+<div class="trade-btn">
+Over/Under
+</div>
+
+
+<div class="trade-btn">
+Matches
+</div>
+
+
+<div class="trade-btn">
+Differs
+</div>
+
+
+<div class="trade-btn">
+Higher/Lower
+</div>
+
+
+
+</div>
+
+
+
+
+
 <div class="card">
 
-<h3>Latest Digit</h3>
 
-<div class="digit" id="latestDigit">
-7
-</div>
+<h2 id="tradeTitle">
+Even / Odd
+</h2>
 
-</div>
-
-
-
-
-
-<div class="analysis-slider">
-
-
-
-<div class="analysis-card">
-
-
-<h2>Even / Odd</h2>
 
 
 <div class="circle-row">
+
 
 
 <div>
@@ -293,6 +293,7 @@ Even
 
 
 
+
 <div>
 
 <div class="meter">
@@ -310,136 +311,39 @@ Odd
 </div>
 
 
+
 </div>
+
 
 
 <div class="confidence" id="evenConfidence">
+
 Analyzing...
-</div>
-
 
 </div>
-
-<div class="analysis-card">
-
-
-<h2>Over / Under</h2>
-
-
-
-<div class="circle-row">
-
-
-<div>
-
-
-<div class="meter">
-
-<div class="inner" id="overPercent">
-50%
-</div>
-
-</div>
-
-
-<div class="label">
-Over 5
-</div>
-
 
 </div>
 
 
 
 
-
-<div>
-
-
-<div class="meter">
-
-<div class="inner" id="underPercent">
-50%
-</div>
-
-</div>
-
-
-<div class="label">
-Under 5
-</div>
-
-
-</div>
-
-
-</div>
-
-
-<div class="confidence" id="overConfidence">
-Analyzing...
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<div class="card">
+<div class="card" id="strengthCard">
 
 
 <h3>📊 Market Strength</h3>
 
 
 
-<p>Even</p>
+<p id="strengthLabel">
+Even Strength
+</p>
+
 
 <div class="bar">
 
-<div id="evenBar"></div>
+<div id="strengthBar"></div>
 
 </div>
-
-
-
-
-<p>Odd</p>
-
-<div class="bar">
-
-<div id="oddBar"></div>
-
-</div>
-
-
-
-
-<p>Over 5</p>
-
-<div class="bar">
-
-<div id="overBar"></div>
-
-</div>
-
-
-
-
-<p>Under 5</p>
-
-<div class="bar">
-
-<div id="underBar"></div>
-
-</div>
-
 
 
 
@@ -458,18 +362,41 @@ Analyzing...
 
 
 
+
+<div class="card">
+
+
+<h3>Latest Digit</h3>
+
+
+<div class="digit" id="latestDigit">
+
+7
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
 <div class="card">
 
 
 <h3>Tick History</h3>
 
 
+
 <div class="tick-container" id="tickHistory">
+
 
 </div>
 
-
-<br>
 
 
 <div class="confidence" id="tickFlow">
@@ -479,7 +406,9 @@ Analyzing flow...
 </div>
 
 
+
 </div>
+
 
 
 
@@ -489,11 +418,31 @@ Analyzing flow...
 <div class="card">
 
 
-<button>
+<h3>Over / Under</h3>
 
-Connect Deriv Market
 
-</button>
+<div class="circle-row">
+
+
+
+<div>
+
+<div class="meter">
+
+<div class="inner" id="overPercent">
+
+50%
+
+</div>
+
+</div>
+
+
+<div class="label">
+
+Over 5
+
+</div>
 
 
 </div>
@@ -502,7 +451,45 @@ Connect Deriv Market
 
 
 
+<div>
+
+<div class="meter">
+
+<div class="inner" id="underPercent">
+
+50%
+
 </div>
+
+</div>
+
+
+<div class="label">
+
+Under 5
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+</div>
+
+
 
 
 
@@ -511,5 +498,4 @@ Connect Deriv Market
 
 </body>
 
-
-    </html>
+</html>
