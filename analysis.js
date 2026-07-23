@@ -35,15 +35,32 @@ function getConfidence(value){
 
 
 
-function updatePercent(id,value){
+
+
+function updateMeter(id,value){
+
 
     let box = document.getElementById(id);
 
+
     if(box){
+
         box.innerHTML = value + "%";
+
+
+        let meter = box.parentElement;
+
+
+        meter.style.background =
+        `conic-gradient(
+        #00ff88 ${value}%,
+        #374151 ${value}%
+        )`;
+
     }
 
 }
+
 
 
 
@@ -63,23 +80,30 @@ function analyzeDigits(){
 
 
         if(digit % 2 === 0){
+
             even++;
-        }
-        else{
+
+        }else{
+
             odd++;
+
         }
 
 
 
         if(digit > 5){
+
             over++;
-        }
-        else{
+
+        }else{
+
             under++;
+
         }
 
 
     });
+
 
 
 
@@ -93,7 +117,7 @@ function analyzeDigits(){
 
 
     let oddPercent =
-    100 - evenPercent;
+    100-evenPercent;
 
 
 
@@ -102,21 +126,24 @@ function analyzeDigits(){
 
 
     let underPercent =
-    100 - overPercent;
+    100-overPercent;
 
 
 
 
 
 
-    updatePercent("evenPercent",evenPercent);
 
-    updatePercent("oddPercent",oddPercent);
+    updateMeter("evenPercent",evenPercent);
+
+    updateMeter("oddPercent",oddPercent);
 
 
-    updatePercent("overPercent",overPercent);
 
-    updatePercent("underPercent",underPercent);
+    updateMeter("overPercent",overPercent);
+
+    updateMeter("underPercent",underPercent);
+
 
 
 
@@ -133,6 +160,7 @@ function analyzeDigits(){
         getConfidence(evenPercent);
 
     }
+
 
 
 
@@ -173,7 +201,8 @@ function analyzeDigits(){
 
 
 
-    // Tick circles
+
+    // Tick history circles
 
     let history =
     document.getElementById("tickHistory");
@@ -181,7 +210,7 @@ function analyzeDigits(){
 
     if(history){
 
-        history.innerHTML = "";
+        history.innerHTML="";
 
 
         ticks.forEach(digit=>{
@@ -224,7 +253,9 @@ function analyzeDigits(){
 
 
 
-    // Flow analysis
+
+
+    // Tick movement flow
 
     let flow =
     document.getElementById("tickFlow");
@@ -258,12 +289,12 @@ function analyzeDigits(){
 
         }
 
-
     }
 
 
 
 }
+
 
 
 
