@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ProScanner Digit Markets</title>
+<title>ProScanner Digit Analysis</title>
 
 <style>
 body{
@@ -15,8 +15,8 @@ body{
 }
 
 header{
-    background:#111827;
     padding:20px;
+    background:#111827;
     font-size:22px;
     font-weight:bold;
 }
@@ -33,11 +33,12 @@ header{
 }
 
 .digit{
-    font-size:60px;
+    font-size:70px;
     text-align:center;
     color:#00ff88;
     font-weight:bold;
 }
+
 
 .grid{
     display:grid;
@@ -45,11 +46,51 @@ header{
     gap:15px;
 }
 
+
+.meter{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:conic-gradient(#00ff88 0% 52%, #374151 52% 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:auto;
+}
+
+
+.inner{
+    width:90px;
+    height:90px;
+    background:#172033;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    font-weight:bold;
+}
+
+
+.title{
+    text-align:center;
+    margin-top:10px;
+}
+
+
+.cursor{
+    text-align:center;
+    font-size:25px;
+    color:#00ff88;
+}
+
+
 .box{
     background:#1f2937;
     padding:15px;
-    border-radius:12px;
+    border-radius:15px;
 }
+
 
 button{
     width:100%;
@@ -60,14 +101,16 @@ button{
     color:white;
     font-size:16px;
 }
+
 </style>
 
 </head>
 
+
 <body>
 
 <header>
-ProScanner Digit Markets
+ProScanner Digit Analysis
 </header>
 
 
@@ -82,57 +125,103 @@ ProScanner Digit Markets
 7
 </div>
 
-<p style="text-align:center;">
-Last tick digit
+<p style="text-align:center">
+Current tick digit
 </p>
 
 </div>
 
 
+
 <div class="grid">
 
-<div class="box">
-<h3>Even/Odd</h3>
-<p>Even: 52%</p>
-<p>Odd: 48%</p>
-</div>
-
-
-<div class="box">
-<h3>Over/Under</h3>
-<p>Over 5: 61%</p>
-<p>Under 5: 39%</p>
-</div>
-
-
-<div class="box">
-<h3>Matches</h3>
-<p>Digit 7: 14%</p>
-</div>
-
-
-<div class="box">
-<h3>Differs</h3>
-<p>Chance: 86%</p>
-</div>
-
-</div>
-
-
-<br>
 
 <div class="card">
 
-<h3>Market Selection</h3>
+<div class="meter">
+
+<div class="inner">
+52%
+</div>
+
+</div>
+
+<div class="title">
+Even
+</div>
+
+<div class="cursor">
+⬆
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<div class="meter"
+style="background:conic-gradient(#00ff88 0% 61%, #374151 61% 100%);">
+
+<div class="inner">
+61%
+</div>
+
+</div>
+
+<div class="title">
+Over 5
+</div>
+
+<div class="cursor">
+⬆
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Digit Statistics</h3>
+
+<div class="box">
+Digit 7 Frequency: 14%
+</div>
+
+<br>
+
+<div class="box">
+Different Digits Probability: 86%
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>Tick History</h3>
+
+<div class="box">
+7 → 2 → 9 → 4 → 1 → 6
+</div>
+
+</div>
+
+
 
 <button>
-Select Digit Market
+Connect Deriv Market
 </button>
 
-</div>
 
 
 </div>
+
 
 </body>
 </html>
