@@ -3,7 +3,7 @@ let ticks = [7,2,9,4,1,6,7,8,3,5];
 
 function addNewTick(){
 
-    let newDigit = Math.floor(Math.random() * 10);
+    let newDigit = Math.floor(Math.random()*10);
 
     ticks.push(newDigit);
 
@@ -35,17 +35,15 @@ function getConfidence(value){
 
 
 
-
 function updatePercent(id,value){
 
-    let element = document.getElementById(id);
+    let box = document.getElementById(id);
 
-    if(element){
-        element.innerHTML = value + "%";
+    if(box){
+        box.innerHTML = value + "%";
     }
 
 }
-
 
 
 
@@ -91,7 +89,7 @@ function analyzeDigits(){
 
 
     let evenPercent =
-    Math.round((even / total) * 100);
+    Math.round((even/total)*100);
 
 
     let oddPercent =
@@ -100,11 +98,12 @@ function analyzeDigits(){
 
 
     let overPercent =
-    Math.round((over / total) * 100);
+    Math.round((over/total)*100);
 
 
     let underPercent =
     100 - overPercent;
+
 
 
 
@@ -138,7 +137,6 @@ function analyzeDigits(){
 
 
 
-
     let overConfidence =
     document.getElementById("overConfidence");
 
@@ -155,6 +153,7 @@ function analyzeDigits(){
 
 
 
+
     // Latest digit
 
     let latest =
@@ -164,7 +163,7 @@ function analyzeDigits(){
     if(latest){
 
         latest.innerHTML =
-        ticks[ticks.length - 1];
+        ticks[ticks.length-1];
 
     }
 
@@ -192,25 +191,21 @@ function analyzeDigits(){
             document.createElement("div");
 
 
-            circle.className = "tick";
+            circle.className="tick";
 
 
-            circle.innerHTML = digit;
+            circle.innerHTML=digit;
 
 
-
-            // Different colors
 
             if(digit % 2 === 0){
 
-                circle.style.background =
-                "#16a34a";
+                circle.style.background="#16a34a";
 
             }
             else{
 
-                circle.style.background =
-                "#f97316";
+                circle.style.background="#f97316";
 
             }
 
@@ -219,8 +214,49 @@ function analyzeDigits(){
             history.appendChild(circle);
 
 
-
         });
+
+
+    }
+
+
+
+
+
+
+    // Flow analysis
+
+    let flow =
+    document.getElementById("tickFlow");
+
+
+    if(flow){
+
+
+        let first = ticks[0];
+
+        let last = ticks[ticks.length-1];
+
+
+
+        if(last > first){
+
+            flow.innerHTML =
+            "⬆ Rising flow";
+
+        }
+        else if(last < first){
+
+            flow.innerHTML =
+            "⬇ Falling flow";
+
+        }
+        else{
+
+            flow.innerHTML =
+            "➡ Sideways flow";
+
+        }
 
 
     }
