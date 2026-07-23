@@ -1,1 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProScanner Dashboard</title>
 
+  <style>
+    body{
+      margin:0;
+      font-family:Arial,sans-serif;
+      background:#111827;
+      color:white;
+    }
+
+    header{
+      background:#1f2937;
+      padding:20px;
+      text-align:center;
+      font-size:24px;
+      font-weight:bold;
+    }
+
+    .container{
+      padding:20px;
+    }
+
+    .card{
+      background:#1f2937;
+      border-radius:15px;
+      padding:20px;
+      margin-bottom:20px;
+    }
+
+    .balance{
+      font-size:34px;
+      color:#00ff88;
+      margin-top:10px;
+    }
+
+    .buttons{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:20px;
+    }
+
+    button{
+      padding:15px;
+      border:none;
+      border-radius:10px;
+      font-size:16px;
+      cursor:pointer;
+      background:#2563eb;
+      color:white;
+    }
+
+    .menu{
+      display:grid;
+      gap:15px;
+      margin-top:20px;
+    }
+
+    .menu button{
+      background:#374151;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+ProScanner
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>Welcome 👋</h2>
+
+<p>Demo Balance</p>
+
+<div class="balance">$10,000.00</div>
+
+<div class="buttons">
+<button>Deposit</button>
+<button>Withdraw</button>
+</div>
+
+</div>
+
+<div class="menu">
+<button>📈 Start Trading</button>
+<button>📊 Trade History</button>
+<button>👤 Profile</button>
+<button>⚙️ Settings</button>
+<button onclick="logout()">🚪 Logout</button>
+</div>
+
+</div>
+
+<script>
+function logout(){
+  window.location.href="index.html";
+}
+</script>
+
+</body>
+</html>
