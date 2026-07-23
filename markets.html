@@ -30,11 +30,14 @@ font-weight:bold;
 }
 
 
+
 .container{
 
 padding:20px;
 
 }
+
+
 
 
 .card{
@@ -48,13 +51,16 @@ margin-bottom:20px;
 
 
 
-/* Top markets */
+
+
+/* scrolling market menu */
 
 .trade-menu{
 
 display:flex;
 overflow-x:auto;
 gap:12px;
+margin-bottom:20px;
 
 }
 
@@ -62,8 +68,8 @@ gap:12px;
 
 .trade-btn{
 
-padding:12px 18px;
 background:#1f2937;
+padding:12px 18px;
 border-radius:20px;
 white-space:nowrap;
 
@@ -81,13 +87,14 @@ background:#2563eb;
 
 
 
-
 .circle-row{
 
 display:flex;
 justify-content:space-around;
+gap:15px;
 
 }
+
 
 
 
@@ -95,7 +102,6 @@ justify-content:space-around;
 
 width:120px;
 height:120px;
-
 border-radius:50%;
 
 background:#374151;
@@ -108,14 +114,16 @@ justify-content:center;
 
 
 
+
+
 .inner{
 
 width:90px;
 height:90px;
 
-border-radius:50%;
-
 background:#111827;
+
+border-radius:50%;
 
 display:flex;
 align-items:center;
@@ -149,6 +157,8 @@ overflow:hidden;
 }
 
 
+
+
 .bar div{
 
 height:100%;
@@ -156,7 +166,10 @@ width:0%;
 
 background:#00ff88;
 
+transition:.5s;
+
 }
+
 
 
 
@@ -164,8 +177,8 @@ background:#00ff88;
 .digit{
 
 font-size:70px;
-text-align:center;
 font-weight:bold;
+text-align:center;
 color:#00ff88;
 
 }
@@ -173,14 +186,16 @@ color:#00ff88;
 
 
 
+
 .tick-container{
 
 display:flex;
-gap:10px;
 flex-wrap:wrap;
 justify-content:center;
+gap:10px;
 
 }
+
 
 
 
@@ -188,6 +203,7 @@ justify-content:center;
 
 width:42px;
 height:42px;
+
 border-radius:50%;
 
 display:flex;
@@ -197,6 +213,7 @@ justify-content:center;
 font-weight:bold;
 
 }
+
 
 
 
@@ -210,11 +227,12 @@ margin-top:15px;
 
 </style>
 
-
 </head>
 
 
+
 <body>
+
 
 
 <header>
@@ -222,6 +240,7 @@ margin-top:15px;
 ProScanner Digit Markets
 
 </header>
+
 
 
 
@@ -237,9 +256,11 @@ Even/Odd
 </div>
 
 
+
 <div class="trade-btn" data-market="overunder">
 Over/Under
 </div>
+
 
 
 <div class="trade-btn" data-market="matches">
@@ -247,9 +268,11 @@ Matches
 </div>
 
 
+
 <div class="trade-btn" data-market="differs">
 Differs
 </div>
+
 
 
 <div class="trade-btn" data-market="higherlower">
@@ -257,21 +280,19 @@ Higher/Lower
 </div>
 
 
+
 </div>
+
+
+
+
 
 <div class="card">
 
 
 <h2 id="marketTitle">
-
 Even / Odd
-
 </h2>
-
-
-
-
-<div id="analysisContent">
 
 
 
@@ -285,16 +306,13 @@ Even / Odd
 
 <div class="inner" id="firstPercent">
 50%
-
 </div>
 
 </div>
 
 
 <div class="label" id="firstLabel">
-
 Even
-
 </div>
 
 
@@ -308,31 +326,16 @@ Even
 
 <div class="meter">
 
-
 <div class="inner" id="secondPercent">
-
 50%
-
 </div>
-
 
 </div>
 
 
 <div class="label" id="secondLabel">
-
 Odd
-
 </div>
-
-
-</div>
-
-
-
-
-</div>
-
 
 
 </div>
@@ -345,7 +348,14 @@ Odd
 
 
 
+<div class="confidence" id="marketStatus">
 
+Analyzing...
+
+</div>
+
+
+</div>
 
 <div class="card">
 
@@ -360,7 +370,6 @@ Even/Odd Strength
 </p>
 
 
-
 <div class="bar">
 
 <div id="strengthBar"></div>
@@ -369,14 +378,8 @@ Even/Odd Strength
 
 
 
-<div class="confidence" id="marketStatus">
-
-Analyzing...
-
 </div>
 
-
-</div>
 
 
 
@@ -395,6 +398,7 @@ Analyzing...
 7
 
 </div>
+
 
 
 </div>
@@ -420,9 +424,10 @@ Analyzing...
 
 <div class="confidence" id="tickFlow">
 
-Analyzing flow...
+Analyzing Flow...
 
 </div>
+
 
 
 </div>
@@ -443,5 +448,6 @@ Analyzing flow...
 
 
 </body>
+
 
 </html>
