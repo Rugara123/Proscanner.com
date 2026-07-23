@@ -12,10 +12,12 @@
 <style>
 
 body{
+
 margin:0;
 font-family:Arial,sans-serif;
 background:#0b1220;
 color:white;
+
 }
 
 
@@ -30,13 +32,11 @@ font-weight:bold;
 }
 
 
-
 .container{
 
 padding:20px;
 
 }
-
 
 
 
@@ -51,9 +51,6 @@ margin-bottom:20px;
 
 
 
-
-
-/* scrolling market menu */
 
 .trade-menu{
 
@@ -87,92 +84,6 @@ background:#2563eb;
 
 
 
-.circle-row{
-
-display:flex;
-justify-content:space-around;
-gap:15px;
-
-}
-
-
-
-
-.meter{
-
-width:120px;
-height:120px;
-border-radius:50%;
-
-background:#374151;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-}
-
-
-
-
-
-.inner{
-
-width:90px;
-height:90px;
-
-background:#111827;
-
-border-radius:50%;
-
-display:flex;
-align-items:center;
-justify-content:center;
-
-font-size:22px;
-font-weight:bold;
-
-}
-
-
-
-
-.label{
-
-text-align:center;
-margin-top:10px;
-
-}
-
-
-
-
-.bar{
-
-height:12px;
-background:#374151;
-border-radius:10px;
-overflow:hidden;
-
-}
-
-
-
-
-.bar div{
-
-height:100%;
-width:0%;
-
-background:#00ff88;
-
-transition:.5s;
-
-}
-
-
-
-
 
 .digit{
 
@@ -187,15 +98,90 @@ color:#00ff88;
 
 
 
-.tick-container{
 
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:10px;
+.bar-box{
+
+margin-top:20px;
 
 }
 
+
+
+.bar-label{
+
+display:flex;
+justify-content:space-between;
+margin-bottom:6px;
+
+}
+
+
+
+.bar{
+
+height:15px;
+background:#374151;
+border-radius:10px;
+overflow:hidden;
+
+}
+
+
+
+.bar-fill{
+
+height:100%;
+width:50%;
+background:#00ff88;
+transition:.5s;
+
+}
+
+
+
+
+.trade-choice{
+
+display:flex;
+gap:15px;
+margin-top:20px;
+
+}
+
+
+
+.choice-btn{
+
+flex:1;
+padding:14px;
+border:none;
+border-radius:12px;
+background:#1f2937;
+color:white;
+font-weight:bold;
+
+}
+
+
+
+.choice-btn.selected{
+
+background:#2563eb;
+
+}
+
+
+
+
+
+.tick-container{
+
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:center;
+
+}
 
 
 
@@ -203,7 +189,6 @@ gap:10px;
 
 width:42px;
 height:42px;
-
 border-radius:50%;
 
 display:flex;
@@ -213,7 +198,6 @@ justify-content:center;
 font-weight:bold;
 
 }
-
 
 
 
@@ -227,12 +211,11 @@ margin-top:15px;
 
 </style>
 
+
 </head>
 
 
-
 <body>
-
 
 
 <header>
@@ -243,9 +226,7 @@ ProScanner Digit Markets
 
 
 
-
 <div class="container">
-
 
 
 <div class="trade-menu">
@@ -256,11 +237,9 @@ Even/Odd
 </div>
 
 
-
 <div class="trade-btn" data-market="overunder">
 Over/Under
 </div>
-
 
 
 <div class="trade-btn" data-market="matches">
@@ -268,17 +247,14 @@ Matches
 </div>
 
 
-
 <div class="trade-btn" data-market="differs">
 Differs
 </div>
 
 
-
 <div class="trade-btn" data-market="higherlower">
 Higher/Lower
 </div>
-
 
 
 </div>
@@ -291,106 +267,16 @@ Higher/Lower
 
 
 <h2 id="marketTitle">
+
 Even / Odd
+
 </h2>
 
 
 
-<div class="circle-row">
-
-
-
-<div>
-
-<div class="meter">
-
-<div class="inner" id="firstPercent">
-50%
-</div>
-
-</div>
-
-
-<div class="label" id="firstLabel">
-Even
-</div>
-
-
-</div>
-
-
-
-
-
-<div>
-
-<div class="meter">
-
-<div class="inner" id="secondPercent">
-50%
-</div>
-
-</div>
-
-
-<div class="label" id="secondLabel">
-Odd
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-<div class="confidence" id="marketStatus">
-
-Analyzing...
-
-</div>
-
-
-</div>
-
-<div class="card">
-
-
-<h3>📊 Market Strength</h3>
-
-
-<p id="strengthLabel">
-
-Even/Odd Strength
-
-</p>
-
-
-<div class="bar">
-
-<div id="strengthBar"></div>
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="card">
-
-
-<h3>Latest Digit</h3>
+<h3>
+Latest Digit
+</h3>
 
 
 <div class="digit" id="latestDigit">
@@ -399,6 +285,105 @@ Even/Odd Strength
 
 </div>
 
+<div class="bar-box">
+
+
+<div class="bar-label">
+
+<span id="firstLabel">
+Even
+</span>
+
+
+<span id="firstPercent">
+50%
+
+</span>
+
+</div>
+
+
+
+<div class="bar">
+
+<div class="bar-fill" id="firstBar">
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="bar-box">
+
+
+<div class="bar-label">
+
+<span id="secondLabel">
+Odd
+</span>
+
+
+<span id="secondPercent">
+50%
+
+</span>
+
+</div>
+
+
+
+<div class="bar">
+
+<div class="bar-fill" id="secondBar">
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<h3>
+
+Select Trade
+
+</h3>
+
+
+<div class="trade-choice">
+
+
+<button class="choice-btn" id="firstChoice">
+
+EVEN
+
+</button>
+
+
+
+<button class="choice-btn" id="secondChoice">
+
+ODD
+
+</button>
+
+
+
+</div>
+
 
 
 </div>
@@ -413,7 +398,9 @@ Even/Odd Strength
 <div class="card">
 
 
-<h3>Tick History</h3>
+<h3>
+Tick History
+</h3>
 
 
 <div class="tick-container" id="tickHistory">
@@ -448,6 +435,5 @@ Analyzing Flow...
 
 
 </body>
-
 
 </html>
