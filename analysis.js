@@ -36,7 +36,7 @@ function getConfidence(value){
 
 
 
-function update(id,value){
+function updatePercent(id,value){
 
     let element = document.getElementById(id);
 
@@ -45,6 +45,7 @@ function update(id,value){
     }
 
 }
+
 
 
 
@@ -59,16 +60,14 @@ function analyzeDigits(){
     let under = 0;
 
 
-    let frequency = {};
-
-
 
     ticks.forEach(digit=>{
 
 
         if(digit % 2 === 0){
             even++;
-        }else{
+        }
+        else{
             odd++;
         }
 
@@ -76,14 +75,10 @@ function analyzeDigits(){
 
         if(digit > 5){
             over++;
-        }else{
+        }
+        else{
             under++;
         }
-
-
-
-        frequency[digit] =
-        (frequency[digit] || 0) + 1;
 
 
     });
@@ -99,7 +94,6 @@ function analyzeDigits(){
     Math.round((even / total) * 100);
 
 
-
     let oddPercent =
     100 - evenPercent;
 
@@ -109,7 +103,6 @@ function analyzeDigits(){
     Math.round((over / total) * 100);
 
 
-
     let underPercent =
     100 - overPercent;
 
@@ -117,14 +110,14 @@ function analyzeDigits(){
 
 
 
-    update("evenPercent",evenPercent);
+    updatePercent("evenPercent",evenPercent);
 
-    update("oddPercent",oddPercent);
+    updatePercent("oddPercent",oddPercent);
 
 
-    update("overPercent",overPercent);
+    updatePercent("overPercent",overPercent);
 
-    update("underPercent",underPercent);
+    updatePercent("underPercent",underPercent);
 
 
 
@@ -162,65 +155,75 @@ function analyzeDigits(){
 
 
 
+    // Latest digit
 
-    // Hot and Cold digits
-
-
-    let sorted =
-    Object.entries(frequency)
-    .sort((a,b)=>b[1]-a[1]);
+    let latest =
+    document.getElementById("latestDigit");
 
 
+    if(latest){
 
-    let hot =
-    sorted.slice(0,3)
-    .map(x=>x[0]+" ("+x[1]+"x)")
-    .join(" | ");
+        latest.innerHTML =
+        ticks[ticks.length - 1];
 
-
-
-
-    let cold =
-    sorted.slice(-3)
-    .map(x=>x[0]+" ("+x[1]+"x)")
-    .join(" | ");
-
-
-
-
-    let hotBox =
-    document.getElementById("hotDigits");
-
-
-    if(hotBox){
-        hotBox.innerHTML =
-        "🔥 "+hot;
     }
 
 
 
 
 
-    let coldBox =
-    document.getElementById("coldDigits");
 
 
-    if(coldBox){
-        coldBox.innerHTML =
-        "❄️ "+cold;
+    // Tick circles
+
+    let history =
+    document.getElementById("tickHistory");
+
+
+    if(history){
+
+        history.innerHTML = "";
+
+
+        ticks.forEach(digit=>{
+
+
+            let circle =
+            document.createElement("div");
+
+
+            circle.className = "tick";
+
+
+            circle.innerHTML = digit;
+
+
+
+            // Different colors
+
+            if(digit % 2 === 0){
+
+                circle.style.background =
+                "#16a34a";
+
+            }
+            else{
+
+                circle.style.background =
+                "#f97316";
+
+            }
+
+
+
+            history.appendChild(circle);
+
+
+
+        });
+
+
     }
-
-
-
-
-
-    document.getElementById("latestDigit").innerHTML =
-    ticks[ticks.length-1];
-
-
-
-    document.getElementById("tickHistory").innerHTML =
-    ticks.join(" → ");
 
 
 
