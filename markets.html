@@ -22,9 +22,9 @@ body{
 header{
     background:#111827;
     padding:20px;
+    text-align:center;
     font-size:22px;
     font-weight:bold;
-    text-align:center;
 }
 
 
@@ -34,37 +34,52 @@ header{
 
 
 .card{
+
     background:#172033;
+
     padding:20px;
+
     border-radius:18px;
+
     margin-bottom:20px;
+
 }
+
 
 
 .analysis-slider{
 
     display:flex;
+
     overflow-x:auto;
+
     gap:20px;
 
 }
 
 
+
 .analysis-card{
 
     min-width:90%;
+
     background:#1f2937;
+
     padding:20px;
+
     border-radius:18px;
 
 }
+
 
 
 
 .circle-row{
 
     display:flex;
+
     justify-content:space-around;
+
     gap:15px;
 
 }
@@ -74,6 +89,7 @@ header{
 .meter{
 
     width:120px;
+
     height:120px;
 
     border-radius:50%;
@@ -81,10 +97,10 @@ header{
     background:#374151;
 
     display:flex;
-    align-items:center;
-    justify-content:center;
 
-    position:relative;
+    align-items:center;
+
+    justify-content:center;
 
 }
 
@@ -93,26 +109,32 @@ header{
 .inner{
 
     width:90px;
-    height:90px;
 
-    border-radius:50%;
+    height:90px;
 
     background:#111827;
 
+    border-radius:50%;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
 
     font-size:22px;
+
     font-weight:bold;
 
 }
 
 
 
+
 .label{
 
     text-align:center;
+
     margin-top:10px;
 
 }
@@ -122,7 +144,9 @@ header{
 .confidence{
 
     text-align:center;
+
     margin-top:15px;
+
     font-size:18px;
 
 }
@@ -132,19 +156,50 @@ header{
 .digit{
 
     text-align:center;
+
     font-size:70px;
-    color:#00ff88;
+
     font-weight:bold;
+
+    color:#00ff88;
 
 }
 
 
 
-.box{
+.tick-container{
 
-    background:#111827;
-    padding:15px;
-    border-radius:12px;
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    justify-content:center;
+
+}
+
+
+
+.tick{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-weight:bold;
+
+    font-size:18px;
+
+    background:#2563eb;
 
 }
 
@@ -153,12 +208,15 @@ header{
 button{
 
     width:100%;
+
     padding:15px;
 
     border:none;
+
     border-radius:12px;
 
     background:#2563eb;
+
     color:white;
 
     font-size:16px;
@@ -175,8 +233,11 @@ button{
 
 
 <header>
+
 ProScanner Digit Markets
+
 </header>
+
 
 
 <div class="container">
@@ -184,27 +245,37 @@ ProScanner Digit Markets
 
 <div class="card">
 
+
 <h3>Latest Digit</h3>
 
+
 <div class="digit" id="latestDigit">
+
 7
-</div>
 
 </div>
+
+
+</div>
+
 
 
 <div class="analysis-slider">
 
 
+
 <div class="analysis-card">
 
+
 <h2>Even / Odd</h2>
+
 
 
 <div class="circle-row">
 
 
 <div>
+
 
 <div class="meter" id="evenMeter">
 
@@ -214,14 +285,18 @@ ProScanner Digit Markets
 
 </div>
 
+
 <div class="label">
 Even
 </div>
 
+
 </div>
 
 
+
 <div>
+
 
 <div class="meter" id="oddMeter">
 
@@ -231,9 +306,11 @@ Even
 
 </div>
 
+
 <div class="label">
 Odd
 </div>
+
 
 </div>
 
@@ -242,15 +319,19 @@ Odd
 
 
 <div class="confidence" id="evenConfidence">
+
 Analyzing...
-</div>
-
 
 </div>
 
+
+    </div>
+    
 <div class="analysis-card">
 
+
 <h2>Over / Under</h2>
+
 
 
 <div class="circle-row">
@@ -298,43 +379,25 @@ Under 5
 </div>
 
 
+
 </div>
+
 
 
 <div class="confidence" id="overConfidence">
+
 Analyzing...
-</div>
-
-
-</div>
-
 
 </div>
 
 
 
-<div class="card">
-
-
-<h3>🔥 Hot Digits</h3>
-
-<div class="box" id="hotDigits">
-Analyzing...
 </div>
 
 
 
-<br>
-
-
-<h3>❄️ Cold Digits</h3>
-
-<div class="box" id="coldDigits">
-Analyzing...
 </div>
 
-
-</div>
 
 
 
@@ -345,34 +408,41 @@ Analyzing...
 <h3>Tick History</h3>
 
 
-<div class="box" id="tickHistory">
-
-7 → 2 → 9 → 4 → 1
+<div class="tick-container" id="tickHistory">
 
 </div>
 
 
 </div>
+
 
 
 
 
 <div class="card">
 
+
 <button>
+
 Connect Deriv Market
+
 </button>
 
-</div>
-
-
 
 </div>
+
+
+
+
+
+</div>
+
 
 
 <script src="analysis.js"></script>
 
 
 </body>
+
 
 </html>
