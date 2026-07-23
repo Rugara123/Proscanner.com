@@ -35,6 +35,7 @@ function analyzeDigits(){
 
     let even = 0;
     let over = 0;
+    let frequency = {};
 
 
     ticks.forEach(digit => {
@@ -46,6 +47,11 @@ function analyzeDigits(){
         if(digit > 5){
             over++;
         }
+
+
+        // Count digit frequency
+        frequency[digit] =
+        (frequency[digit] || 0) + 1;
 
     });
 
@@ -63,10 +69,9 @@ function analyzeDigits(){
 
 
 
-    // Update circle colors
+    // Circle updates
 
-    let evenMeter =
-    document.getElementById("evenMeter");
+    let evenMeter = document.getElementById("evenMeter");
 
     if(evenMeter){
         evenMeter.style.background =
@@ -74,9 +79,7 @@ function analyzeDigits(){
     }
 
 
-
-    let overMeter =
-    document.getElementById("overMeter");
+    let overMeter = document.getElementById("overMeter");
 
     if(overMeter){
         overMeter.style.background =
@@ -85,11 +88,9 @@ function analyzeDigits(){
 
 
 
+    // Needle movement
 
-    // Move needles
-
-    let evenNeedle =
-    document.getElementById("evenNeedle");
+    let evenNeedle = document.getElementById("evenNeedle");
 
     if(evenNeedle){
         evenNeedle.style.transform =
@@ -97,9 +98,7 @@ function analyzeDigits(){
     }
 
 
-
-    let overNeedle =
-    document.getElementById("overNeedle");
+    let overNeedle = document.getElementById("overNeedle");
 
     if(overNeedle){
         overNeedle.style.transform =
@@ -108,8 +107,7 @@ function analyzeDigits(){
 
 
 
-
-    // Update confidence
+    // Confidence labels
 
     let evenConfidence =
     document.getElementById("evenConfidence");
@@ -118,7 +116,6 @@ function analyzeDigits(){
         evenConfidence.innerHTML =
         getConfidence(evenPercent);
     }
-
 
 
     let overConfidence =
@@ -131,8 +128,46 @@ function analyzeDigits(){
 
 
 
+    // Hot & Cold digits
 
-    // Update numbers
+    let sortedDigits =
+    Object.entries(frequency)
+    .sort((a,b)=>b[1]-a[1]);
+
+
+    let hot =
+    sortedDigits.slice(0,3)
+    .map(item => item[0]+" ("+item[1]+"x)")
+    .join(" | ");
+
+
+    let cold =
+    sortedDigits.slice(-3)
+    .map(item => item[0]+" ("+item[1]+"x)")
+    .join(" | ");
+
+
+
+    let hotBox =
+    document.getElementById("hotDigits");
+
+    if(hotBox){
+        hotBox.innerHTML =
+        "🔥 " + hot;
+    }
+
+
+    let coldBox =
+    document.getElementById("coldDigits");
+
+    if(coldBox){
+        coldBox.innerHTML =
+        "❄️ " + cold;
+    }
+
+
+
+    // Update display
 
     document.getElementById("evenPercent").innerHTML =
     evenPercent + "%";
@@ -142,10 +177,8 @@ function analyzeDigits(){
     overPercent + "%";
 
 
-
     document.getElementById("latestDigit").innerHTML =
     ticks[ticks.length - 1];
-
 
 
     document.getElementById("tickHistory").innerHTML =
