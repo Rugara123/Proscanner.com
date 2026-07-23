@@ -170,7 +170,7 @@ $10,000.00
 
 <h3>Quick Actions</h3>
 
-<button>📈 Start Trading</button>
+<button onclick="openMarkets()">📈 Digit Markets</button>
 <br><br>
 <button>📊 Trade History</button>
 <br><br>
@@ -189,7 +189,11 @@ $10,000.00
 <div>👤 Account</div>
 </div>
 
-
+<script>
+function openMarkets(){
+  window.location.href="markets.html";
+}
+</script>
 <script type="module" src="dashboard.js"></script>
 
 </body>
