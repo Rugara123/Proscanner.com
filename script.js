@@ -14,7 +14,7 @@ async function login() {
       password
     );
 
-    alert("Login successful!");
+    window.location.href = "dashboard.html";
     // TODO: Redirect to your dashboard
     // Example:
     // window.location.href = "dashboard.html";
