@@ -1,14 +1,15 @@
 let ticks = [7,2,9,4,1,6,7,8,3,5];
 
+
 function addNewTick(){
 
-    // Generate a new digit 0-9
+    // Create new random digit
     let newDigit = Math.floor(Math.random() * 10);
 
     ticks.push(newDigit);
 
 
-    // Keep only the latest 10 ticks
+    // Keep latest 10 ticks only
     if(ticks.length > 10){
         ticks.shift();
     }
@@ -16,6 +17,7 @@ function addNewTick(){
 
     analyzeDigits();
 }
+
 
 
 function analyzeDigits(){
@@ -27,18 +29,24 @@ function analyzeDigits(){
 
     ticks.forEach(digit => {
 
+        // Even calculation
         if(digit % 2 === 0){
             even++;
         }
 
+
+        // Over 5 calculation
         if(digit > 5){
             over++;
         }
 
+
+        // Frequency calculation
         frequency[digit] =
         (frequency[digit] || 0) + 1;
 
     });
+
 
 
     let total = ticks.length;
@@ -53,27 +61,82 @@ function analyzeDigits(){
 
 
 
-    document.getElementById("evenPercent").innerHTML =
-    evenPercent + "%";
+    // Update circle meters
+
+    let evenMeter =
+    document.getElementById("evenMeter");
+
+    if(evenMeter){
+        evenMeter.style.background =
+        `conic-gradient(#00ff88 0% ${evenPercent}%, #374151 ${evenPercent}% 100%)`;
+    }
 
 
-    document.getElementById("overPercent").innerHTML =
-    overPercent + "%";
+
+    let overMeter =
+    document.getElementById("overMeter");
+
+    if(overMeter){
+        overMeter.style.background =
+        `conic-gradient(#00ff88 0% ${overPercent}%, #374151 ${overPercent}% 100%)`;
+    }
 
 
-    document.getElementById("latestDigit").innerHTML =
-    ticks[ticks.length - 1];
+
+    // Update percentage text
+
+    let evenText =
+    document.getElementById("evenPercent");
+
+    if(evenText){
+        evenText.innerHTML =
+        evenPercent + "%";
+    }
 
 
-    document.getElementById("tickHistory").innerHTML =
-    ticks.join(" → ");
+
+    let overText =
+    document.getElementById("overPercent");
+
+    if(overText){
+        overText.innerHTML =
+        overPercent + "%";
+    }
+
+
+
+    // Update latest digit
+
+    let latest =
+    document.getElementById("latestDigit");
+
+    if(latest){
+        latest.innerHTML =
+        ticks[ticks.length - 1];
+    }
+
+
+
+    // Update history
+
+    let history =
+    document.getElementById("tickHistory");
+
+    if(history){
+        history.innerHTML =
+        ticks.join(" → ");
+    }
+
 
 }
 
 
-// Start live simulation
-setInterval(addNewTick, 2000);
+
+// Start live tick simulation
+
+setInterval(addNewTick,2000);
 
 
-// Load first result
+// Run immediately
+
 analyzeDigits();
