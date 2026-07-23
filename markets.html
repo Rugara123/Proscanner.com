@@ -20,16 +20,20 @@ color:white;
 
 
 header{
+
 background:#111827;
 padding:20px;
 text-align:center;
 font-size:22px;
 font-weight:bold;
+
 }
 
 
 .container{
+
 padding:20px;
+
 }
 
 
@@ -44,14 +48,13 @@ margin-bottom:20px;
 
 
 
-/* Trade menu */
+/* Top markets */
 
 .trade-menu{
 
 display:flex;
 overflow-x:auto;
 gap:12px;
-margin-bottom:20px;
 
 }
 
@@ -59,11 +62,10 @@ margin-bottom:20px;
 
 .trade-btn{
 
-background:#1f2937;
 padding:12px 18px;
+background:#1f2937;
 border-radius:20px;
 white-space:nowrap;
-cursor:pointer;
 
 }
 
@@ -93,7 +95,9 @@ justify-content:space-around;
 
 width:120px;
 height:120px;
+
 border-radius:50%;
+
 background:#374151;
 
 display:flex;
@@ -108,7 +112,9 @@ justify-content:center;
 
 width:90px;
 height:90px;
+
 border-radius:50%;
+
 background:#111827;
 
 display:flex;
@@ -133,18 +139,6 @@ margin-top:10px;
 
 
 
-.digit{
-
-font-size:70px;
-text-align:center;
-font-weight:bold;
-color:#00ff88;
-
-}
-
-
-
-
 .bar{
 
 height:12px;
@@ -155,15 +149,26 @@ overflow:hidden;
 }
 
 
-
 .bar div{
 
 height:100%;
 width:0%;
+
 background:#00ff88;
 
 }
 
+
+
+
+.digit{
+
+font-size:70px;
+text-align:center;
+font-weight:bold;
+color:#00ff88;
+
+}
 
 
 
@@ -195,18 +200,16 @@ font-weight:bold;
 
 
 
-
 .confidence{
 
 text-align:center;
 margin-top:15px;
-font-size:18px;
 
 }
 
 
-
 </style>
+
 
 </head>
 
@@ -229,44 +232,46 @@ ProScanner Digit Markets
 <div class="trade-menu">
 
 
-<div class="trade-btn active">
+<div class="trade-btn active" data-market="evenodd">
 Even/Odd
 </div>
 
 
-<div class="trade-btn">
+<div class="trade-btn" data-market="overunder">
 Over/Under
 </div>
 
 
-<div class="trade-btn">
+<div class="trade-btn" data-market="matches">
 Matches
 </div>
 
 
-<div class="trade-btn">
+<div class="trade-btn" data-market="differs">
 Differs
 </div>
 
 
-<div class="trade-btn">
+<div class="trade-btn" data-market="higherlower">
 Higher/Lower
 </div>
 
 
-
 </div>
-
-
-
-
 
 <div class="card">
 
 
-<h2 id="tradeTitle">
+<h2 id="marketTitle">
+
 Even / Odd
+
 </h2>
+
+
+
+
+<div id="analysisContent">
 
 
 
@@ -278,15 +283,20 @@ Even / Odd
 
 <div class="meter">
 
-<div class="inner" id="evenPercent">
+<div class="inner" id="firstPercent">
 50%
-</div>
 
 </div>
 
-<div class="label">
+</div>
+
+
+<div class="label" id="firstLabel">
+
 Even
+
 </div>
+
 
 </div>
 
@@ -298,45 +308,57 @@ Even
 
 <div class="meter">
 
-<div class="inner" id="oddPercent">
+
+<div class="inner" id="secondPercent">
+
 50%
-</div>
 
 </div>
 
-<div class="label">
+
+</div>
+
+
+<div class="label" id="secondLabel">
+
 Odd
-</div>
 
 </div>
 
-
-
-</div>
-
-
-
-<div class="confidence" id="evenConfidence">
-
-Analyzing...
-
-</div>
 
 </div>
 
 
 
 
-<div class="card" id="strengthCard">
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
 
 
 <h3>📊 Market Strength</h3>
 
 
-
 <p id="strengthLabel">
-Even Strength
+
+Even/Odd Strength
+
 </p>
+
 
 
 <div class="bar">
@@ -352,7 +374,6 @@ Even Strength
 Analyzing...
 
 </div>
-
 
 
 </div>
@@ -376,8 +397,8 @@ Analyzing...
 </div>
 
 
-
 </div>
+
 
 
 
@@ -391,9 +412,7 @@ Analyzing...
 <h3>Tick History</h3>
 
 
-
 <div class="tick-container" id="tickHistory">
-
 
 </div>
 
@@ -406,80 +425,7 @@ Analyzing flow...
 </div>
 
 
-
 </div>
-
-
-
-
-
-
-
-<div class="card">
-
-
-<h3>Over / Under</h3>
-
-
-<div class="circle-row">
-
-
-
-<div>
-
-<div class="meter">
-
-<div class="inner" id="overPercent">
-
-50%
-
-</div>
-
-</div>
-
-
-<div class="label">
-
-Over 5
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div>
-
-<div class="meter">
-
-<div class="inner" id="underPercent">
-
-50%
-
-</div>
-
-</div>
-
-
-<div class="label">
-
-Under 5
-
-</div>
-
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
 
 
 
