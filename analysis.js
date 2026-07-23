@@ -7,12 +7,16 @@ function addNewTick(){
 
     ticks.push(newDigit);
 
+
     if(ticks.length > 10){
         ticks.shift();
     }
 
+
     analyzeDigits();
+
 }
+
 
 
 
@@ -27,41 +31,72 @@ function getConfidence(value){
     }
 
     return "🔴 Weak";
+
 }
+
+
 
 
 
 function analyzeDigits(){
 
+
     let even = 0;
+    let odd = 0;
+
     let over = 0;
+    let under = 0;
+
     let frequency = {};
+
+
 
 
     ticks.forEach(digit => {
 
+
+
         if(digit % 2 === 0){
             even++;
         }
+        else{
+            odd++;
+        }
+
+
 
         if(digit > 5){
             over++;
         }
+        else{
+            under++;
+        }
 
 
-        // Count digit frequency
+
         frequency[digit] =
         (frequency[digit] || 0) + 1;
 
+
+
     });
+
+
 
 
 
     let total = ticks.length;
 
 
+
     let evenPercent =
     Math.round((even / total) * 100);
+
+
+
+    let oddPercent =
+    Math.round((odd / total) * 100);
+
 
 
     let overPercent =
@@ -69,76 +104,69 @@ function analyzeDigits(){
 
 
 
-    // Circle updates
-
-    let evenMeter = document.getElementById("evenMeter");
-
-    if(evenMeter){
-        evenMeter.style.background =
-        `conic-gradient(#00ff88 0% ${evenPercent}%, #374151 ${evenPercent}% 100%)`;
-    }
-
-
-    let overMeter = document.getElementById("overMeter");
-
-    if(overMeter){
-        overMeter.style.background =
-        `conic-gradient(#00ff88 0% ${overPercent}%, #374151 ${overPercent}% 100%)`;
-    }
+    let underPercent =
+    Math.round((under / total) * 100);
 
 
 
-    // Needle movement
-
-    let evenNeedle = document.getElementById("evenNeedle");
-
-    if(evenNeedle){
-        evenNeedle.style.transform =
-        `rotate(${(evenPercent * 1.8)-90}deg)`;
-    }
 
 
-    let overNeedle = document.getElementById("overNeedle");
+    // Update percentages
 
-    if(overNeedle){
-        overNeedle.style.transform =
-        `rotate(${(overPercent * 1.8)-90}deg)`;
-    }
+
+    document.getElementById("evenPercent").innerHTML =
+    evenPercent + "%";
 
 
 
-    // Confidence labels
-
-    let evenConfidence =
-    document.getElementById("evenConfidence");
-
-    if(evenConfidence){
-        evenConfidence.innerHTML =
-        getConfidence(evenPercent);
-    }
-
-
-    let overConfidence =
-    document.getElementById("overConfidence");
-
-    if(overConfidence){
-        overConfidence.innerHTML =
-        getConfidence(overPercent);
-    }
+    document.getElementById("oddPercent").innerHTML =
+    oddPercent + "%";
 
 
 
-    // Hot & Cold digits
+    document.getElementById("overPercent").innerHTML =
+    overPercent + "%";
+
+
+
+    document.getElementById("underPercent").innerHTML =
+    underPercent + "%";
+
+
+
+
+
+    // Confidence
+
+
+    document.getElementById("evenConfidence").innerHTML =
+    getConfidence(evenPercent);
+
+
+
+    document.getElementById("overConfidence").innerHTML =
+    getConfidence(overPercent);
+
+
+
+
+
+
+    // Hot and cold digits
+
 
     let sortedDigits =
     Object.entries(frequency)
     .sort((a,b)=>b[1]-a[1]);
 
 
+
     let hot =
     sortedDigits.slice(0,3)
     .map(item => item[0]+" ("+item[1]+"x)")
     .join(" | ");
+
+
 
 
     let cold =
@@ -148,37 +176,26 @@ function analyzeDigits(){
 
 
 
-    let hotBox =
-    document.getElementById("hotDigits");
-
-    if(hotBox){
-        hotBox.innerHTML =
-        "🔥 " + hot;
-    }
 
 
-    let coldBox =
-    document.getElementById("coldDigits");
-
-    if(coldBox){
-        coldBox.innerHTML =
-        "❄️ " + cold;
-    }
+    document.getElementById("hotDigits").innerHTML =
+    "🔥 " + hot;
 
 
 
-    // Update display
-
-    document.getElementById("evenPercent").innerHTML =
-    evenPercent + "%";
+    document.getElementById("coldDigits").innerHTML =
+    "❄️ " + cold;
 
 
-    document.getElementById("overPercent").innerHTML =
-    overPercent + "%";
+
+
+
+    // Latest digit
 
 
     document.getElementById("latestDigit").innerHTML =
-    ticks[ticks.length - 1];
+    ticks[ticks.length-1];
+
 
 
     document.getElementById("tickHistory").innerHTML =
@@ -188,7 +205,10 @@ function analyzeDigits(){
 
 
 
+
+
 setInterval(addNewTick,2000);
+
 
 
 analyzeDigits();
