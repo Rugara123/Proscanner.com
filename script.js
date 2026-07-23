@@ -1,4 +1,4 @@
-function login() {
+async function login() {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
 
@@ -7,5 +7,18 @@ function login() {
     return;
   }
 
-  alert("Authentication will be connected in the next step.");
+  try {
+    await window.signInWithEmailAndPassword(
+      window.firebaseAuth,
+      email,
+      password
+    );
+
+    alert("Login successful!");
+    // TODO: Redirect to your dashboard
+    // Example:
+    // window.location.href = "dashboard.html";
+  } catch (error) {
+    alert(error.message);
+  }
 }
