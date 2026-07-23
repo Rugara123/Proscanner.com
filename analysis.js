@@ -3,19 +3,30 @@ let ticks = [7,2,9,4,1,6,7,8,3,5];
 
 function addNewTick(){
 
-    // Create new random digit
     let newDigit = Math.floor(Math.random() * 10);
 
     ticks.push(newDigit);
 
-
-    // Keep latest 10 ticks only
     if(ticks.length > 10){
         ticks.shift();
     }
 
-
     analyzeDigits();
+}
+
+
+
+function getConfidence(value){
+
+    if(value >= 66){
+        return "🟢 Strong";
+    }
+
+    if(value >= 40){
+        return "🟡 Medium";
+    }
+
+    return "🔴 Weak";
 }
 
 
@@ -24,26 +35,17 @@ function analyzeDigits(){
 
     let even = 0;
     let over = 0;
-    let frequency = {};
 
 
     ticks.forEach(digit => {
 
-        // Even calculation
         if(digit % 2 === 0){
             even++;
         }
 
-
-        // Over 5 calculation
         if(digit > 5){
             over++;
         }
-
-
-        // Frequency calculation
-        frequency[digit] =
-        (frequency[digit] || 0) + 1;
 
     });
 
@@ -61,7 +63,7 @@ function analyzeDigits(){
 
 
 
-    // Update circle meters
+    // Update circle colors
 
     let evenMeter =
     document.getElementById("evenMeter");
@@ -82,78 +84,78 @@ function analyzeDigits(){
     }
 
 
-// Update moving needles
 
-let evenNeedle =
-document.getElementById("evenNeedle");
 
-if(evenNeedle){
-    evenNeedle.style.transform =
-    `rotate(${(evenPercent * 1.8)-90}deg)`;
+    // Move needles
+
+    let evenNeedle =
+    document.getElementById("evenNeedle");
+
+    if(evenNeedle){
+        evenNeedle.style.transform =
+        `rotate(${(evenPercent * 1.8)-90}deg)`;
+    }
+
+
+
+    let overNeedle =
+    document.getElementById("overNeedle");
+
+    if(overNeedle){
+        overNeedle.style.transform =
+        `rotate(${(overPercent * 1.8)-90}deg)`;
+    }
+
+
+
+
+    // Update confidence
+
+    let evenConfidence =
+    document.getElementById("evenConfidence");
+
+    if(evenConfidence){
+        evenConfidence.innerHTML =
+        getConfidence(evenPercent);
+    }
+
+
+
+    let overConfidence =
+    document.getElementById("overConfidence");
+
+    if(overConfidence){
+        overConfidence.innerHTML =
+        getConfidence(overPercent);
+    }
+
+
+
+
+    // Update numbers
+
+    document.getElementById("evenPercent").innerHTML =
+    evenPercent + "%";
+
+
+    document.getElementById("overPercent").innerHTML =
+    overPercent + "%";
+
+
+
+    document.getElementById("latestDigit").innerHTML =
+    ticks[ticks.length - 1];
+
+
+
+    document.getElementById("tickHistory").innerHTML =
+    ticks.join(" → ");
+
 }
 
 
-let overNeedle =
-document.getElementById("overNeedle");
-
-if(overNeedle){
-    overNeedle.style.transform =
-    `rotate(${(overPercent * 1.8)-90}deg)`;
-}
-    // Update percentage text
-
-    let evenText =
-    document.getElementById("evenPercent");
-
-    if(evenText){
-        evenText.innerHTML =
-        evenPercent + "%";
-    }
-
-
-
-    let overText =
-    document.getElementById("overPercent");
-
-    if(overText){
-        overText.innerHTML =
-        overPercent + "%";
-    }
-
-
-
-    // Update latest digit
-
-    let latest =
-    document.getElementById("latestDigit");
-
-    if(latest){
-        latest.innerHTML =
-        ticks[ticks.length - 1];
-    }
-
-
-
-    // Update history
-
-    let history =
-    document.getElementById("tickHistory");
-
-    if(history){
-        history.innerHTML =
-        ticks.join(" → ");
-    }
-
-
-}
-
-
-
-// Start live tick simulation
 
 setInterval(addNewTick,2000);
 
-
-// Run immediately
 
 analyzeDigits();
