@@ -1,5 +1,8 @@
 let ticks = [7,2,9,4,1,6,7,8,3,5];
 
+let currentMarket = "even";
+
+
 
 function addNewTick(){
 
@@ -19,29 +22,10 @@ function addNewTick(){
 
 
 
-function getConfidence(value){
 
-    if(value >= 66){
-        return "🟢 Strong";
-    }
-
-    if(value >= 40){
-        return "🟡 Medium";
-    }
-
-    return "🔴 Weak";
-
-}
-
-
-
-
-
-function updateMeter(id,value){
-
+function updatePercent(id,value){
 
     let box = document.getElementById(id);
-
 
     if(box){
 
@@ -51,11 +35,33 @@ function updateMeter(id,value){
         let meter = box.parentElement;
 
 
-        meter.style.background =
-        `conic-gradient(
-        #00ff88 ${value}%,
-        #374151 ${value}%
-        )`;
+        if(meter){
+
+            meter.style.background =
+            `conic-gradient(
+            #00ff88 ${value}%,
+            #374151 ${value}%
+            )`;
+
+        }
+
+    }
+
+}
+
+
+
+
+function setBar(value){
+
+    let bar =
+    document.getElementById("strengthBar");
+
+
+    if(bar){
+
+        bar.style.width =
+        value + "%";
 
     }
 
@@ -107,7 +113,6 @@ function analyzeDigits(){
 
 
 
-
     let total = ticks.length;
 
 
@@ -134,30 +139,57 @@ function analyzeDigits(){
 
 
 
-    updateMeter("evenPercent",evenPercent);
+    updatePercent("evenPercent",evenPercent);
 
-    updateMeter("oddPercent",oddPercent);
-
-
-
-    updateMeter("overPercent",overPercent);
-
-    updateMeter("underPercent",underPercent);
+    updatePercent("oddPercent",oddPercent);
 
 
+
+    updatePercent("overPercent",overPercent);
+
+    updatePercent("underPercent",underPercent);
 
 
 
 
 
-    let evenConfidence =
-    document.getElementById("evenConfidence");
 
 
-    if(evenConfidence){
+    let strength;
 
-        evenConfidence.innerHTML =
-        getConfidence(evenPercent);
+
+    if(currentMarket === "over"){
+
+        strength = overPercent;
+
+    }
+    else{
+
+        strength = evenPercent;
+
+    }
+
+
+
+
+    setBar(strength);
+
+
+
+
+
+    let strengthLabel =
+    document.getElementById("strengthLabel");
+
+
+    if(strengthLabel){
+
+        strengthLabel.innerHTML =
+        currentMarket === "over"
+        ?
+        "Over/Under Strength"
+        :
+        "Even/Odd Strength";
 
     }
 
@@ -165,14 +197,31 @@ function analyzeDigits(){
 
 
 
-    let overConfidence =
-    document.getElementById("overConfidence");
+
+    let status =
+    document.getElementById("marketStatus");
 
 
-    if(overConfidence){
+    if(status){
 
-        overConfidence.innerHTML =
-        getConfidence(overPercent);
+        if(strength >= 66){
+
+            status.innerHTML =
+            "🟢 Strong Market";
+
+        }
+        else if(strength >= 40){
+
+            status.innerHTML =
+            "🟡 Balanced Market";
+
+        }
+        else{
+
+            status.innerHTML =
+            "🔴 Weak Market";
+
+        }
 
     }
 
@@ -181,8 +230,6 @@ function analyzeDigits(){
 
 
 
-
-    // Latest digit
 
     let latest =
     document.getElementById("latestDigit");
@@ -201,8 +248,6 @@ function analyzeDigits(){
 
 
 
-
-    // Tick history circles
 
     let history =
     document.getElementById("tickHistory");
@@ -255,8 +300,6 @@ function analyzeDigits(){
 
 
 
-    // Tick movement flow
-
     let flow =
     document.getElementById("tickFlow");
 
@@ -292,8 +335,50 @@ function analyzeDigits(){
     }
 
 
-
 }
+
+
+
+
+
+// Trade menu buttons
+
+document.querySelectorAll(".trade-btn")
+.forEach(button=>{
+
+
+    button.onclick=function(){
+
+
+        document.querySelectorAll(".trade-btn")
+        .forEach(btn=>btn.classList.remove("active"));
+
+
+
+        this.classList.add("active");
+
+
+
+        if(this.innerHTML.includes("Over")){
+
+            currentMarket="over";
+
+        }
+        else{
+
+            currentMarket="even";
+
+        }
+
+
+
+        analyzeDigits();
+
+
+    };
+
+
+});
 
 
 
