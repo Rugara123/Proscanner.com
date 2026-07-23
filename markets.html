@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ProScanner Digit Analysis</title>
+<title>ProScanner Digit Markets</title>
+
 
 <style>
+
 body{
     margin:0;
     font-family:Arial,sans-serif;
@@ -14,16 +18,19 @@ body{
     color:white;
 }
 
+
 header{
-    padding:20px;
     background:#111827;
+    padding:20px;
     font-size:22px;
     font-weight:bold;
 }
 
+
 .container{
     padding:20px;
 }
+
 
 .card{
     background:#172033;
@@ -32,106 +39,173 @@ header{
     margin-bottom:20px;
 }
 
-.digit{
-    font-size:70px;
-    text-align:center;
-    color:#00ff88;
-    font-weight:bold;
+
+.analysis-slider{
+
+    display:flex;
+    overflow-x:auto;
+    gap:20px;
+    scroll-snap-type:x mandatory;
+
 }
 
 
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
+.analysis-card{
+
+    min-width:90%;
+    background:#172033;
+    padding:20px;
+    border-radius:18px;
+    scroll-snap-align:start;
+
 }
+
 
 
 .meter{
-    width:120px;
-    height:120px;
+
+    width:130px;
+    height:130px;
     border-radius:50%;
-    background:conic-gradient(#00ff88 0% 52%, #374151 52% 100%);
+    position:relative;
+
+    background:#374151;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     margin:auto;
+
 }
+
 
 
 .inner{
-    width:90px;
-    height:90px;
+
+    width:95px;
+    height:95px;
+
     background:#172033;
+
     border-radius:50%;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:22px;
+
+    font-size:24px;
     font-weight:bold;
+
 }
 
-
-.title{
-    text-align:center;
-    margin-top:10px;
-}
-
-
-.cursor{
-    text-align:center;
-    font-size:25px;
-    color:#00ff88;
-}
-
-
-.box{
-    background:#1f2937;
-    padding:15px;
-    border-radius:15px;
-}
-
-
-button{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:12px;
-    background:#2563eb;
-    color:white;
-    font-size:16px;
-}
-.meter{
-    position:relative;
-    background:conic-gradient(
-        #ef4444 0% 33%,
-        #facc15 33% 66%,
-        #00ff88 66% 100%
-    );
-}
 
 
 .needle{
+
     position:absolute;
+
     width:4px;
-    height:55px;
+    height:60px;
+
     background:white;
+
     top:5px;
-    left:58px;
+    left:63px;
+
     transform-origin:bottom center;
+
     transform:rotate(-90deg);
+
     transition:0.8s ease;
+
     border-radius:10px;
-    }
+
+}
+
+
+
+.title{
+
+    text-align:center;
+
+    margin-top:15px;
+
+    font-size:18px;
+
+}
+
+
+
+.confidence{
+
+    text-align:center;
+
+    margin-top:10px;
+
+    font-size:18px;
+
+}
+
+
+.digit{
+
+    font-size:70px;
+
+    text-align:center;
+
+    color:#00ff88;
+
+    font-weight:bold;
+
+}
+
+
+
+.box{
+
+    background:#1f2937;
+
+    padding:15px;
+
+    border-radius:12px;
+
+}
+
+
+
+button{
+
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+}
+
+
 </style>
+
 
 </head>
 
 
 <body>
 
+
 <header>
-ProScanner Digit Analysis
+
+ProScanner Digit Markets
+
 </header>
 
 
@@ -147,21 +221,27 @@ ProScanner Digit Analysis
 </div>
 
 <p style="text-align:center">
-Current tick digit
+Live tick digit
 </p>
 
 </div>
+</div>
 
 
+<div class="analysis-slider">
 
-<div class="grid">
 
+<!-- EVEN / ODD -->
 
-<div class="card">
+<div class="analysis-card">
+
+<h3>Even / Odd</h3>
+
 
 <div class="meter" id="evenMeter">
 
 <div class="needle" id="evenNeedle"></div>
+
 
 <div class="inner" id="evenPercent">
 52%
@@ -171,11 +251,11 @@ Current tick digit
 
 
 <div class="title">
-Even
+Even Probability
 </div>
 
 
-<div id="evenConfidence">
+<div class="confidence" id="evenConfidence">
 Analyzing...
 </div>
 
@@ -185,25 +265,32 @@ Analyzing...
 
 
 
-<div class="card">
+<!-- OVER / UNDER -->
+
+<div class="analysis-card">
+
+<h3>Over / Under</h3>
+
 
 <div class="meter" id="overMeter">
 
 <div class="needle" id="overNeedle"></div>
 
+
 <div class="inner" id="overPercent">
 61%
 </div>
+
 
 </div>
 
 
 <div class="title">
-Over 5
+Over 5 Probability
 </div>
 
 
-<div id="overConfidence">
+<div class="confidence" id="overConfidence">
 Analyzing...
 </div>
 
@@ -215,33 +302,6 @@ Analyzing...
 
 
 
-<div class="card">
-
-<h3>Digit Statistics</h3>
-
-<div class="box">
-Digit 7 Frequency: 14%
-</div>
-
-<br>
-
-<div class="box">
-Different Digits Probability: 86%
-</div>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>Tick History</h3>
-
-<div class="box" id="tickHistory">
-7 → 2 → 9 → 4 → 1 → 6
-</div>
-
-</div>
 <div class="card">
 
 <h3>🔥 Hot Digits</h3>
@@ -253,6 +313,7 @@ Analyzing...
 
 <br>
 
+
 <h3>❄️ Cold Digits</h3>
 
 <div class="box" id="coldDigits">
@@ -262,14 +323,40 @@ Analyzing...
 </div>
 
 
+
+
+<div class="card">
+
+<h3>Tick History</h3>
+
+
+<div class="box" id="tickHistory">
+7 → 2 → 9 → 4 → 1 → 6
+</div>
+
+
+</div>
+
+
+
+
+<div class="card">
+
 <button>
 Connect Deriv Market
 </button>
+
+</div>
 
 
 
 </div>
 
+
+
 <script src="analysis.js"></script>
+
+
 </body>
-</html>
+
+    </html>
