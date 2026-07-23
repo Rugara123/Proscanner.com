@@ -1,14 +1,14 @@
 let ticks = [7,2,9,4,1,6,7,8,3,5];
 
-let currentMarket = "even";
+let currentMarket = "evenodd";
 
 
 
 function addNewTick(){
 
-    let newDigit = Math.floor(Math.random()*10);
+    let digit = Math.floor(Math.random()*10);
 
-    ticks.push(newDigit);
+    ticks.push(digit);
 
 
     if(ticks.length > 10){
@@ -16,35 +16,19 @@ function addNewTick(){
     }
 
 
-    analyzeDigits();
+    analyze();
 
 }
 
 
 
 
-function updatePercent(id,value){
+function setValue(id,value){
 
     let box = document.getElementById(id);
 
     if(box){
-
         box.innerHTML = value + "%";
-
-
-        let meter = box.parentElement;
-
-
-        if(meter){
-
-            meter.style.background =
-            `conic-gradient(
-            #00ff88 ${value}%,
-            #374151 ${value}%
-            )`;
-
-        }
-
     }
 
 }
@@ -52,7 +36,28 @@ function updatePercent(id,value){
 
 
 
-function setBar(value){
+function setMarketData(title,first,second,firstName,secondName,firstValue,secondValue){
+
+
+    document.getElementById("marketTitle").innerHTML = title;
+
+
+    setValue("firstPercent",firstValue);
+    setValue("secondPercent",secondValue);
+
+
+    document.getElementById("firstLabel").innerHTML =
+    firstName;
+
+
+    document.getElementById("secondLabel").innerHTML =
+    secondName;
+
+
+    let strength =
+    Math.max(firstValue,secondValue);
+
+
 
     let bar =
     document.getElementById("strengthBar");
@@ -61,17 +66,30 @@ function setBar(value){
     if(bar){
 
         bar.style.width =
-        value + "%";
+        strength+"%";
 
     }
+
+
+
+    let label =
+    document.getElementById("strengthLabel");
+
+
+    if(label){
+
+        label.innerHTML =
+        title+" Strength";
+
+    }
+
 
 }
 
 
 
 
-
-function analyzeDigits(){
+function analyze(){
 
 
     let even = 0;
@@ -82,29 +100,22 @@ function analyzeDigits(){
 
 
 
-    ticks.forEach(digit=>{
+    ticks.forEach(d=>{
 
 
-        if(digit % 2 === 0){
-
+        if(d%2===0){
             even++;
-
-        }else{
-
+        }
+        else{
             odd++;
-
         }
 
 
-
-        if(digit > 5){
-
+        if(d>5){
             over++;
-
-        }else{
-
+        }
+        else{
             under++;
-
         }
 
 
@@ -112,84 +123,42 @@ function analyzeDigits(){
 
 
 
-
     let total = ticks.length;
 
 
 
-    let evenPercent =
-    Math.round((even/total)*100);
+    let evenP =
+    Math.round(even/total*100);
 
 
-    let oddPercent =
-    100-evenPercent;
-
-
-
-    let overPercent =
-    Math.round((over/total)*100);
-
-
-    let underPercent =
-    100-overPercent;
+    let oddP =
+    100-evenP;
 
 
 
+    let overP =
+    Math.round(over/total*100);
 
 
-
-
-    updatePercent("evenPercent",evenPercent);
-
-    updatePercent("oddPercent",oddPercent);
-
-
-
-    updatePercent("overPercent",overPercent);
-
-    updatePercent("underPercent",underPercent);
+    let underP =
+    100-overP;
 
 
 
 
 
+    if(currentMarket==="evenodd"){
 
 
-    let strength;
-
-
-    if(currentMarket === "over"){
-
-        strength = overPercent;
-
-    }
-    else{
-
-        strength = evenPercent;
-
-    }
-
-
-
-
-    setBar(strength);
-
-
-
-
-
-    let strengthLabel =
-    document.getElementById("strengthLabel");
-
-
-    if(strengthLabel){
-
-        strengthLabel.innerHTML =
-        currentMarket === "over"
-        ?
-        "Over/Under Strength"
-        :
-        "Even/Odd Strength";
+        setMarketData(
+        "Even / Odd",
+        evenP,
+        oddP,
+        "Even",
+        "Odd",
+        evenP,
+        oddP
+        );
 
     }
 
@@ -198,30 +167,18 @@ function analyzeDigits(){
 
 
 
-    let status =
-    document.getElementById("marketStatus");
+    if(currentMarket==="overunder"){
 
 
-    if(status){
-
-        if(strength >= 66){
-
-            status.innerHTML =
-            "🟢 Strong Market";
-
-        }
-        else if(strength >= 40){
-
-            status.innerHTML =
-            "🟡 Balanced Market";
-
-        }
-        else{
-
-            status.innerHTML =
-            "🔴 Weak Market";
-
-        }
+        setMarketData(
+        "Over / Under",
+        overP,
+        underP,
+        "Over 5",
+        "Under 5",
+        overP,
+        underP
+        );
 
     }
 
@@ -230,6 +187,69 @@ function analyzeDigits(){
 
 
 
+    if(currentMarket==="matches"){
+
+
+        setMarketData(
+        "Matches",
+        10,
+        90,
+        "Match",
+        "No Match",
+        10,
+        90
+        );
+
+    }
+
+
+
+
+
+
+
+    if(currentMarket==="differs"){
+
+
+        setMarketData(
+        "Differs",
+        90,
+        10,
+        "Different",
+        "Same",
+        90,
+        10
+        );
+
+    }
+
+
+
+
+
+
+
+    if(currentMarket==="higherlower"){
+
+
+        setMarketData(
+        "Higher / Lower",
+        overP,
+        underP,
+        "Higher",
+        "Lower",
+        overP,
+        underP
+        );
+
+    }
+
+
+
+
+
+
+    // Latest digit
 
     let latest =
     document.getElementById("latestDigit");
@@ -247,7 +267,7 @@ function analyzeDigits(){
 
 
 
-
+    // Tick circles
 
     let history =
     document.getElementById("tickHistory");
@@ -258,34 +278,34 @@ function analyzeDigits(){
         history.innerHTML="";
 
 
-        ticks.forEach(digit=>{
+        ticks.forEach(d=>{
 
 
-            let circle =
+            let c =
             document.createElement("div");
 
 
-            circle.className="tick";
+            c.className="tick";
 
 
-            circle.innerHTML=digit;
+            c.innerHTML=d;
 
 
 
-            if(digit % 2 === 0){
+            if(d%2===0){
 
-                circle.style.background="#16a34a";
+                c.style.background="#16a34a";
 
             }
             else{
 
-                circle.style.background="#f97316";
+                c.style.background="#f97316";
 
             }
 
 
 
-            history.appendChild(circle);
+            history.appendChild(c);
 
 
         });
@@ -298,7 +318,7 @@ function analyzeDigits(){
 
 
 
-
+    // Flow
 
     let flow =
     document.getElementById("tickFlow");
@@ -306,33 +326,29 @@ function analyzeDigits(){
 
     if(flow){
 
+        let first=ticks[0];
 
-        let first = ticks[0];
-
-        let last = ticks[ticks.length-1];
-
+        let last=ticks[ticks.length-1];
 
 
-        if(last > first){
+        if(last>first){
 
-            flow.innerHTML =
-            "⬆ Rising flow";
+            flow.innerHTML="⬆ Rising Flow";
 
         }
-        else if(last < first){
+        else if(last<first){
 
-            flow.innerHTML =
-            "⬇ Falling flow";
+            flow.innerHTML="⬇ Falling Flow";
 
         }
         else{
 
-            flow.innerHTML =
-            "➡ Sideways flow";
+            flow.innerHTML="➡ Sideways Flow";
 
         }
 
     }
+
 
 
 }
@@ -341,38 +357,28 @@ function analyzeDigits(){
 
 
 
-// Trade menu buttons
+
 
 document.querySelectorAll(".trade-btn")
-.forEach(button=>{
+.forEach(btn=>{
 
 
-    button.onclick=function(){
+    btn.onclick=function(){
 
 
         document.querySelectorAll(".trade-btn")
-        .forEach(btn=>btn.classList.remove("active"));
+        .forEach(b=>b.classList.remove("active"));
 
 
 
         this.classList.add("active");
 
 
-
-        if(this.innerHTML.includes("Over")){
-
-            currentMarket="over";
-
-        }
-        else{
-
-            currentMarket="even";
-
-        }
+        currentMarket =
+        this.dataset.market;
 
 
-
-        analyzeDigits();
+        analyze();
 
 
     };
@@ -384,8 +390,7 @@ document.querySelectorAll(".trade-btn")
 
 
 
-
 setInterval(addNewTick,2000);
 
 
-analyzeDigits();
+analyze();
