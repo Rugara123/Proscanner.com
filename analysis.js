@@ -19,7 +19,6 @@ function addNewTick(){
 
 
 
-
 function getConfidence(value){
 
     if(value >= 66){
@@ -37,6 +36,18 @@ function getConfidence(value){
 
 
 
+function update(id,value){
+
+    let element = document.getElementById(id);
+
+    if(element){
+        element.innerHTML = value + "%";
+    }
+
+}
+
+
+
 
 function analyzeDigits(){
 
@@ -47,19 +58,17 @@ function analyzeDigits(){
     let over = 0;
     let under = 0;
 
+
     let frequency = {};
 
 
 
-
-    ticks.forEach(digit => {
-
+    ticks.forEach(digit=>{
 
 
         if(digit % 2 === 0){
             even++;
-        }
-        else{
+        }else{
             odd++;
         }
 
@@ -67,8 +76,7 @@ function analyzeDigits(){
 
         if(digit > 5){
             over++;
-        }
-        else{
+        }else{
             under++;
         }
 
@@ -78,9 +86,7 @@ function analyzeDigits(){
         (frequency[digit] || 0) + 1;
 
 
-
     });
-
 
 
 
@@ -95,7 +101,7 @@ function analyzeDigits(){
 
 
     let oddPercent =
-    Math.round((odd / total) * 100);
+    100 - evenPercent;
 
 
 
@@ -105,92 +111,107 @@ function analyzeDigits(){
 
 
     let underPercent =
-    Math.round((under / total) * 100);
+    100 - overPercent;
 
 
 
 
 
-    // Update percentages
+    update("evenPercent",evenPercent);
+
+    update("oddPercent",oddPercent);
 
 
-    document.getElementById("evenPercent").innerHTML =
-    evenPercent + "%";
+    update("overPercent",overPercent);
 
-
-
-    document.getElementById("oddPercent").innerHTML =
-    oddPercent + "%";
-
-
-
-    document.getElementById("overPercent").innerHTML =
-    overPercent + "%";
-
-
-
-    document.getElementById("underPercent").innerHTML =
-    underPercent + "%";
-
-
-
-
-
-    // Confidence
-
-
-    document.getElementById("evenConfidence").innerHTML =
-    getConfidence(evenPercent);
-
-
-
-    document.getElementById("overConfidence").innerHTML =
-    getConfidence(overPercent);
+    update("underPercent",underPercent);
 
 
 
 
 
 
-    // Hot and cold digits
+    let evenConfidence =
+    document.getElementById("evenConfidence");
 
 
-    let sortedDigits =
+    if(evenConfidence){
+
+        evenConfidence.innerHTML =
+        getConfidence(evenPercent);
+
+    }
+
+
+
+
+
+    let overConfidence =
+    document.getElementById("overConfidence");
+
+
+    if(overConfidence){
+
+        overConfidence.innerHTML =
+        getConfidence(overPercent);
+
+    }
+
+
+
+
+
+
+
+    // Hot and Cold digits
+
+
+    let sorted =
     Object.entries(frequency)
     .sort((a,b)=>b[1]-a[1]);
 
 
 
     let hot =
-    sortedDigits.slice(0,3)
-    .map(item => item[0]+" ("+item[1]+"x)")
+    sorted.slice(0,3)
+    .map(x=>x[0]+" ("+x[1]+"x)")
     .join(" | ");
 
 
 
 
     let cold =
-    sortedDigits.slice(-3)
-    .map(item => item[0]+" ("+item[1]+"x)")
+    sorted.slice(-3)
+    .map(x=>x[0]+" ("+x[1]+"x)")
     .join(" | ");
 
 
 
 
-
-    document.getElementById("hotDigits").innerHTML =
-    "🔥 " + hot;
-
+    let hotBox =
+    document.getElementById("hotDigits");
 
 
-    document.getElementById("coldDigits").innerHTML =
-    "❄️ " + cold;
-
-
+    if(hotBox){
+        hotBox.innerHTML =
+        "🔥 "+hot;
+    }
 
 
 
-    // Latest digit
+
+
+    let coldBox =
+    document.getElementById("coldDigits");
+
+
+    if(coldBox){
+        coldBox.innerHTML =
+        "❄️ "+cold;
+    }
+
+
+
 
 
     document.getElementById("latestDigit").innerHTML =
@@ -201,6 +222,8 @@ function analyzeDigits(){
     document.getElementById("tickHistory").innerHTML =
     ticks.join(" → ");
 
+
+
 }
 
 
@@ -208,7 +231,6 @@ function analyzeDigits(){
 
 
 setInterval(addNewTick,2000);
-
 
 
 analyzeDigits();
