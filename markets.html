@@ -101,7 +101,23 @@ button{
     color:white;
     font-size:16px;
 }
+.meter{
+    position:relative;
+}
 
+
+.needle{
+    position:absolute;
+    width:4px;
+    height:55px;
+    background:white;
+    top:5px;
+    left:58px;
+    transform-origin:bottom center;
+    transform:rotate(-90deg);
+    transition:0.8s ease;
+    border-radius:10px;
+    }
 </style>
 
 </head>
@@ -139,6 +155,7 @@ Current tick digit
 <div class="card">
 
 <div class="meter" id="evenMeter">
+    <div class="needle" id="evenNeedle"></div>
 
 <div class="inner" id="evenPercent">
 52%
@@ -161,6 +178,7 @@ Even
 <div class="card">
 
 <div class="meter" id="overMeter">
+    <div class="needle" id="overNeedle"></div>
 <div class="inner" id="overPercent">
 61%
 </div>
